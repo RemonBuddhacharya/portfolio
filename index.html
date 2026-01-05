@@ -2,48 +2,57 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Reman Buddhacharya</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Portfolio of Reman Buddhacharya, a Software Quality Assurance Engineer specialized in manual and automated testing.">
+  <meta name="keywords"
+    content="Reman Buddhacharya, Software Quality Assurance, Manual Testing, Automated Testing, Portfolio, Projects">
+  <meta name="author" content="Reman Buddhacharya">
+
+  <!-- Open Graph meta tags for social media -->
+  <meta property="og:title" content="Reman Buddhacharya | Software Quality Assurance">
+  <meta property="og:description"
+    content="Ensuring production-ready web applications through manual testing, automation, and CI/CD validation.">
+  <meta property="og:url" content="https://remanbuddhacharya.com.np">
+  <meta property="og:type" content="website">
+
+  <title>Reman Buddhacharya | Software Quality Assurance</title>
 
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-
   <div class="container">
 
-    <!-- HERO -->
-    <div class="hero">
-      <h1>REMAN BUDDHACHARYA</h1>
-      <h2>SOFTWARE QUALITY ASSURANCE </h2>
+    <!-- HERO Section -->
+    <header class="hero" aria-labelledby="main-heading">
+      <h1 id="main-heading">Reman Buddhacharya</h1>
+      <h2>Software Quality Assurance Engineer</h2>
       <p>
-        I break systems before users do. <br>
-        Preventing critical bugs and
-        system failures through rigorous manual, automation, and API validation and
-        of web applications ensuring they are secure, reliable, and production ready.
+        I ensure production-ready software by breaking products before users do. Through manual testing, automation, and
+        CI/CD validation, I deliver secure, reliable, and quality web applications.
       </p>
-      <div class="cta">
-        <a href="#projects" class="btn">View Projects</a>
-        <a href="resume.pdf" class="btn outline">Download CV</a>
-      </div>
-    </div>
+      <nav class="cta" aria-label="Hero Call-to-Action Links">
+        <a href="#projects" class="btn" aria-label="View my projects">View Projects</a>
+        <a href="resume/resume.pdf" class="btn outline" aria-label="Download my resume">Download CV</a>
+      </nav>
+    </header>
 
     <!-- EXPERIENCE -->
-    <section>
+    <section id="experience">
       <h3>Professional Experience</h3>
       <div class="timeline">
         <div class="timeline-item">
-          <div class="timeline-marker"></div>
           <div class="timeline-content">
-            <div class="timeline-header">
+            <header class="timeline-header">
               <span class="company">Center Of Research and Development</span>
               <span class="role-title">Software Quality Assurance </span>
-            </div>
+            </header>
             <div class="timeline-meta">
-              <span class="date">Intern → Full-time</span>
+              <time class="date">Intern → Full-time</time>
             </div>
-            <ul>
+            <ul class="timeline-tasks">
               <li>Performed functional, regression, API, and performance testing on production systems.</li>
               <li>Designed and executed detailed test cases covering critical business workflows.</li>
               <li>Identified, reported, and verified defects using Azure DevOps.</li>
@@ -109,7 +118,7 @@
     </section>
 
     <!-- SKILLS -->
-    <section>
+    <section id="skills">
       <h3>Testing Stack</h3>
       <div class="skills-grid">
         <!-- Category 1 -->
@@ -167,12 +176,12 @@
           target="_blank">linkedin.com/in/reman-buddhacharya</a></p>
     </section>
 
-    <footer>
-      © 2025 Reman Buddhacharya · Software Quality Assurance
-    </footer>
 
   </div>
-
+  <footer aria-labelledby="footer-heading">
+    <h2 id="footer-heading" class="visually-hidden">Footer</h2>
+    © 2025 Reman Buddhacharya · Quality Assurance Engineer
+  </footer>
 </body>
 
 </html>
