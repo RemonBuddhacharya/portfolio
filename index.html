@@ -4,113 +4,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Reman Buddhacharya</title>
-
-  <link rel="stylesheet" href="css/style.css">
+  <title>Reman Buddhacharya | Software Quality Assurance</title>
+  <meta name="description"
+    content="Portfolio of Reman Buddhacharya, a Software Quality Assurance specialist specializing in manual, automation, and API testing.">
+  <link rel="stylesheet" href="style.css" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
 
 <body>
 
-  <div class="container">
+  <nav class="navbar">
+    <div class="container nav-container">
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Work</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
 
-    <!-- HERO -->
-    <div class="hero">
-      <h1>REMAN BUDDHACHARYA</h1>
-      <h2>SOFTWARE QUALITY ASSURANCE </h2>
-      <p>
-        I break systems before users do. <br>
-        Preventing critical bugs and
-        system failures through rigorous manual, automation, and API validation and
-        of web applications ensuring they are secure, reliable, and production ready.
+  <header class="hero">
+    <div class="container">
+      <h1>Reman Buddhacharya</h1>
+      <h2 class="job-title">Software Quality Assurance</h2>
+      <p class="subtitle">
+        I break systems before users do, preventing system failures and critical bugs through manual testing,
+        automation, and API validation.
       </p>
-      <div class="cta">
-        <a href="#projects" class="btn">View Projects</a>
-        <a href="resume.pdf" class="btn outline">Download CV</a>
+      <div class="buttons">
+        <a href="#projects" class="btn primary">View Projects</a>
+        <a href="#" class="btn secondary">Download CV</a>
       </div>
     </div>
+  </header>
 
-    <!-- EXPERIENCE -->
-    <section>
-      <h3>Professional Experience</h3>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <div class="timeline-header">
-              <span class="company">Center Of Research and Development</span>
-              <span class="role-title">Software Quality Assurance </span>
-            </div>
-            <div class="timeline-meta">
-              <span class="date">Intern → Full-time</span>
-            </div>
-            <ul>
-              <li>Performed functional, regression, API, and performance testing on production systems.</li>
-              <li>Designed and executed detailed test cases covering critical business workflows.</li>
-              <li>Identified, reported, and verified defects using Azure DevOps.</li>
-              <li>Worked closely with developers in Agile sprints to validate fixes and releases.</li>
-            </ul>
-          </div>
-        </div>
+  <section class="section" id="about">
+    <div class="container">
+      <h2>About Me</h2>
+      <div class="about-content" style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <p style="margin-bottom: 2rem; font-size: 1.15rem; color: var(--text-muted); line-height: 1.8;">
+          Currently, I am working as a Full-time Software Quality Assurance at <strong>Center of Research and
+            Development (CoRD)</strong>, validating production systems and blocking unstable releases. Focused on
+          reliability, performance, and
+          correctness.
+        </p>
+        <p style="margin-bottom: 2.5rem; font-size: 1.15rem; color: var(--text-muted); line-height: 1.8;">
+          I have tested healthcare, billing, and donation platforms including NCRS,
+          collaborating closely with developers to expose defects early and validate critical business logic.
+        </p>
+        <p style="font-size: 1.25rem; font-weight: 600; color: var(--primary);">
+          For me, Quality Assurance is not just about finding bugs,
+          it is about <span style="color: var(--accent)">reducing risk, protecting users, and building
+            confidence</span>.
+        </p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- PROJECTS -->
-    <section id="projects">
-      <h3>Projects Involved</h3>
-      <div class="project-list">
-        <div class="project-item">
-          <h4>KCCS: Kathmandu Clinic of Cusmatic Surgery</h4>
-          <div class="role">Healthcare Platform</div>
-          <ul>
-            <li>Validated end-to-end patient workflows including registration, appointment scheduling, and treatment
-              management.</li>
-            <li>Performed functional, regression, API, and load testing to ensure system stability under concurrent user
-              load.</li>
-            <li>Automated critical login and appointment booking flows using Cypress to reduce repetitive manual
-              testing.</li>
-          </ul>
-        </div>
-
-        <div class="project-item">
-          <h4>NCRS: Nepal Cancer Relief Society</h4>
-          <div class="role">Donation & Membership Platform</div>
-          <ul>
-            <li>Tested authentication, role-based access control,
-              and admin workflows to ensure secure system usage.</li>
-            <li>Verified donation processing,
-              reporting accuracy, and transaction data integrity.</li>
-            <li>Performed regression testing before releases to
-              prevent financial and access-related defects.</li>
-          </ul>
-        </div>
-
-        <div class="project-item">
-          <h4>Billing System</h4>
-          <div class="role">Internal Financial Application</div>
-          <ul>
-            <li>Verified invoice creation, payment processing
-              and due amount calculations across user roles.</li>
-            <li>Conducted role-based permission testing to prevent
-              unauthorized financial access.</li>
-            <li>Performed cross-browser validation
-              to ensure consistent behavior across supported browsers.</li>
-          </ul>
-        </div>
-
-        <div class="project-item">
-          <h4>Remittance System (Ongoing)</h4>
-          <div class="role">Financial Transaction Platform</div>
-          <ul>
-            <li>Tested remittance workflows, reconciliation, and failure handling.</li>
-            <li>Regression testing to ensure accuracy during continuous development.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section>
-      <h3>Testing Stack</h3>
+  <section class="section gray" id="skills">
+    <div class="container">
+      <h2>Testing Stack</h2>
       <div class="skills-grid">
         <!-- Category 1 -->
         <div class="stack-card">
@@ -118,9 +74,10 @@
             <h4>🔍 Core QA</h4>
             <div class="skill-tags">
               <span class="skill-tag">Manual Testing</span>
-              <span class="skill-tag">Test Case & Scenario Design</span>
-              <span class="skill-tag">Regression, Smoke & Sanity Testing</span>
-              <span class="skill-tag">Integration & Cross-browser Testing</span>
+              <span class="skill-tag">Test Case Design</span>
+              <span class="skill-tag">Regression Testing</span>
+              <span class="skill-tag">Smoke & Sanity</span>
+              <span class="skill-tag">Cross-browser</span>
             </div>
           </div>
         </div>
@@ -130,7 +87,8 @@
           <div class="skill-category">
             <h4>🤖 Automation</h4>
             <div class="skill-tags">
-              <span class="skill-tag">Cypress (UI automation)</span>
+              <span class="skill-tag">Cypress (UI)</span>
+              <span class="skill-tag">JavaScript</span>
             </div>
           </div>
         </div>
@@ -140,8 +98,10 @@
           <div class="skill-category">
             <h4>⚡ API & Performance</h4>
             <div class="skill-tags">
-              <span class="skill-tag">API Testing (Postman, Swagger)</span>
-              <span class="skill-tag">Load & Performance Testing (JMeter)</span>
+              <span class="skill-tag">Postman</span>
+              <span class="skill-tag">Swagger</span>
+              <span class="skill-tag">JMeter</span>
+              <span class="skill-tag">Load and Performance Testing</span>
             </div>
           </div>
         </div>
@@ -152,26 +112,88 @@
             <h4>🛠️ Tools & Process</h4>
             <div class="skill-tags">
               <span class="skill-tag">Azure DevOps</span>
-              <span class="skill-tag">Agile / Scrum QA Process</span>
+              <span class="skill-tag">Excel</span>
+              <span class="skill-tag">Agile / Scrum</span>
+              <span class="skill-tag">Documentation</span>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- CONTACT -->
-    <section class="contact">
-      <h3>Contact</h3>
-      <p>Email: remanbuddhacharya@gmail.com</p>
-      <p>LinkedIn: <a href="https://linkedin.com/in/reman-buddhacharya"
-          target="_blank">linkedin.com/in/reman-buddhacharya</a></p>
-    </section>
+  <section class="section" id="projects">
+    <div class="container">
+      <h2>Professional Experience</h2>
+      <div class="grid">
+        <!-- Project 01 -->
+        <div class="card">
+          <div class="project-header">
+            <span class="project-number">01</span>
+            <h3>KCCS: Clinic Management System</h3>
+            <p class="org-name">Kathmandu Cosmetic Clinic Surgery</p>
+          </div>
+          <p class="project-desc">A clinic management system supporting patient records, appointments, and treatment
+            workflows.</p>
+          <ul class="project-list">
+            <li>Validated patient registration and appointment scheduling flows</li>
+            <li>Verified treatment and surgery record management</li>
+            <li>Performed functional, API, and regression testing across modules</li>
+            <li>Conducted load and performance testing to ensure system stability</li>
+          </ul>
+        </div>
 
-    <footer>
-      © 2025 Reman Buddhacharya · Software Quality Assurance
-    </footer>
+        <!-- Project 02 -->
+        <div class="card">
+          <div class="project-header">
+            <span class="project-number">02</span>
+            <h3>NCRS Web System</h3>
+            <p class="org-name">Nepal Cancer Relief Society</p>
+          </div>
+          <p class="project-desc">A web platform for managing donations, memberships, and administrative operations.</p>
+          <ul class="project-list">
+            <li>Verified user authentication and role-based authorization</li>
+            <li>Validated donation tracking and payment workflows</li>
+            <li>Tested member management features and data integrity</li>
+            <li>Verified reporting and analytics accuracy</li>
+          </ul>
+        </div>
 
-  </div>
+        <!-- Project 03 -->
+        <div class="card">
+          <div class="project-header">
+            <span class="project-number">03</span>
+            <h3>Billing System</h3>
+            <p class="org-name">Internal Application</p>
+          </div>
+          <p class="project-desc">An internal system for client billing, invoicing, and payment tracking.</p>
+          <ul class="project-list">
+            <li>Validated invoice generation and payment processing flows</li>
+            <li>Tested user roles and permission controls (Admin, Client, Staff)</li>
+            <li>Performed cross-browser and peak-load testing</li>
+            <li>Verified financial data accuracy across integrated modules</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section gray" id="contact">
+    <div class="container" style="text-align: center;">
+      <h2>Get In Touch</h2>
+      <p
+        style="margin-bottom: 2.5rem; font-size: 1.15rem; color: var(--text-muted); max-width: 600px; margin-left: auto; margin-right: auto;">
+        Interested in working together? Let's talk about how I can help your team achieve total product confidence.
+      </p>
+      <a href="mailto:remanbuddhacharya@gmail.com" class="btn primary">Send Message</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Reman Buddhacharya · Software Quality Assurance</p>
+    </div>
+  </footer>
 
 </body>
 
