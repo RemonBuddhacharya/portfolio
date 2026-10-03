@@ -39,7 +39,7 @@ keystatic.config.ts the admin schema
 ## Deploy
 
 Hosting: Cloudflare Workers Builds (free). Cloudflare builds on every push to `main`, so no GitHub Actions workflow is needed.
-Final URL: https://remanbuddhacharya.com.np/. The admin commits to `ChandanShakya/portfolio` (set in `keystatic.config.ts`).
+Final URL: https://remanbuddhacharya.com.np/. The admin commits to `Remonbuddhacharya/portfolio` (set in `keystatic.config.ts`).
 
 ### Variables
 
@@ -55,7 +55,7 @@ You never invent these. Keystatic creates them (step 2).
 
 ### Order
 
-1. **Get the code on `main`.** On GitHub, open a pull request from `chandan-astro-switch` into `main` in `ChandanShakya/portfolio` and merge it.
+1. **Get the code on `main`.** On GitHub, open a pull request from `chandan-astro-switch` into `main` in `Remonbuddhacharya/portfolio` and merge it.
 2. **Create the GitHub App and the secrets (local, once).**
    ```bash
    git pull && npm install
@@ -65,7 +65,7 @@ You never invent these. Keystatic creates them (step 2).
    - Deployed URL: `https://remanbuddhacharya.com.np`
    - Approve on GitHub, then install the app on the `portfolio` repo only.
    - Keystatic writes `.env` with the 4 Keystatic values. `.env` is git-ignored; never commit it.
-3. **Create the Cloudflare project.** Dashboard → Workers & Pages → Create → Import a repository → `ChandanShakya/portfolio`, branch `main`.
+3. **Create the Cloudflare project.** Dashboard → Workers & Pages → Create → Import a repository → `Remonbuddhacharya/portfolio`, branch `main`.
    - Project name: `reman-portfolio` (must match `wrangler.jsonc`)
    - Build command: `npm run build`
    - Deploy command: `npx wrangler deploy`
