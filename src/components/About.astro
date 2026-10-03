@@ -1,0 +1,19 @@
+---
+import { settings } from '../lib/content';
+---
+
+<section class="section" id="about">
+  <div class="container narrow">
+    <h2 class="section-title">About Me</h2>
+    <div class="body">
+      {settings.about.map((p) => <p>{p}</p>)}
+      <p class="hl">{settings.aboutHighlight}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .body { text-align: center; display: grid; gap: 1.75rem; }
+  .body p { font-size: clamp(1rem, 2.5vw, 1.15rem); color: var(--muted); line-height: 1.8; }
+  .hl { font-size: clamp(1.1rem, 3vw, 1.3rem) !important; font-weight: 600; color: var(--primary) !important; }
+</style>

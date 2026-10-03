@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Gallery from '../../components/Gallery.astro';
+import { getAlbums, formatDate } from '../../lib/content';
+
+export async function getStaticPaths() {
+  return (await getAlbums()).map((album) => ({ params: { album: album.id }, props: { album } }));
+}
+
+const { album } = Astro.props;
+const { title, date, description, photos } = album.data;
+---
+
+<BaseLayout title={title} description={description || `Photo album: ${title}`}>
+  <section class="section page">
+    <div class="container">
+      <p class="back"><a href="/gallery">← All albums</a></p>
+      <h1 class="section-title">{title}</h1>
+      <p class="section-lead">{description}{description && ' · '}{formatDate(date)}</p>
+      {photos.length > 0 ? <Gallery photos={photos} /> : <p class="empty">This album has no photos yet.</p>}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page { padding-top: 120px; }
+  .back { margin-bottom: 1rem; }
+  .back a { color: var(--accent); font-weight: 600; }
+  .section-title { margin-bottom: 3rem; }
+</style>

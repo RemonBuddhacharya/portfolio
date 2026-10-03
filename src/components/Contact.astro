@@ -1,0 +1,18 @@
+---
+import { settings } from '../lib/content';
+---
+
+<section class="section alt" id="contact">
+  <div class="container narrow center">
+    <h2 class="section-title">Get In Touch</h2>
+    <p class="section-lead">Interested in working together? Let's talk about how I can help your team achieve total product confidence.</p>
+    <a href={`mailto:${settings.email}`} class="btn primary">Send Message</a>
+    <p class="meta">{settings.location} · <a href={settings.linkedin} rel="noopener">LinkedIn</a> · <a href={settings.github} rel="noopener">GitHub</a></p>
+  </div>
+</section>
+
+<style>
+  .center { text-align: center; }
+  .meta { margin-top: 2rem; color: var(--muted); font-size: 0.95rem; }
+  .meta a { color: var(--accent); }
+</style>

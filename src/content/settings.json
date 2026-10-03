@@ -1,0 +1,15 @@
+{
+  "name": "Reman Buddhacharya",
+  "jobTitle": "Software Quality Assurance",
+  "tagline": "I break systems before users do, preventing system failures and critical bugs through manual testing, automation, and API validation.",
+  "email": "remanbuddhacharya@gmail.com",
+  "location": "Kathmandu, Nepal",
+  "github": "https://github.com/RemonBuddhacharya",
+  "linkedin": "https://linkedin.com/in/reman-buddhacharya",
+  "resume": null,
+  "about": [
+    "Currently, I am working as a Full-time Software Quality Assurance at Center of Research and Development (CoRD), validating production systems and blocking unstable releases. Focused on reliability, performance, and correctness.",
+    "I have tested healthcare, billing, and donation platforms including NCRS, collaborating closely with developers to expose defects early and validate critical business logic."
+  ],
+  "aboutHighlight": "For me, Quality Assurance is not just about finding bugs, it is about reducing risk, protecting users, and building confidence."
+}

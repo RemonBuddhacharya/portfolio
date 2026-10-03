@@ -1,0 +1,12 @@
+{
+  "title": "KCCS: Clinic Management System",
+  "org": "Kathmandu Cosmetic Clinic Surgery",
+  "order": 1,
+  "description": "A clinic management system supporting patient records, appointments, and treatment workflows.",
+  "points": [
+    "Validated patient registration and appointment scheduling flows",
+    "Verified treatment and surgery record management",
+    "Performed functional, API, and regression testing across modules",
+    "Conducted load and performance testing to ensure system stability"
+  ]
+}

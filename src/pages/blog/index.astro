@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPosts } from '../../lib/content';
+
+const posts = await getPosts();
+const tags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
+---
+
+<BaseLayout title="Blog" description="Notes on software testing, things I learn, and stories behind my photos.">
+  <section class="section page">
+    <div class="container">
+      <h1 class="section-title">Blog</h1>
+      <p class="section-lead">Software testing notes, lessons learned, and stories from the places I photograph.</p>
+
+      {posts.length === 0 ? (
+        <p class="empty">No posts yet. Check back soon.</p>
+      ) : (
+        <>
+          <div class="tools">
+            <input type="search" id="q" placeholder="Search posts…" aria-label="Search posts" />
+            <div class="filters" role="group" aria-label="Filter by tag">
+              <button class="chip active" data-tag="">All</button>
+              {tags.map((t) => <button class="chip" data-tag={t.toLowerCase()}>{t}</button>)}
+            </div>
+          </div>
+          <div class="grid" id="posts">{posts.map((post) => <PostCard post={post} />)}</div>
+          <p class="empty" id="none" hidden>No posts match.</p>
+        </>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page { padding-top: 140px; }
+  .tools { display: grid; gap: 1rem; margin-bottom: 2rem; }
+  #q { width: 100%; max-width: 420px; justify-self: center; padding: 0.8rem 1.1rem; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); color: var(--text); font: inherit; }
+  .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+  .chip { font: inherit; font-size: 0.85rem; font-weight: 600; padding: 0.45rem 1rem; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); cursor: pointer; transition: var(--ease); }
+  .chip:hover, .chip.active { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 1.5rem; }
+</style>
+
+<script>
+  const q = document.querySelector<HTMLInputElement>('#q');
+  const cards = [...document.querySelectorAll<HTMLElement>('#posts > article, #posts > *')];
+  const chips = [...document.querySelectorAll<HTMLButtonElement>('.chip')];
+  const none = document.getElementById('none');
+  let tag = '';
+  const apply = () => {
+    const term = (q?.value ?? '').trim().toLowerCase();
+    let shown = 0;
+    for (const c of cards) {
+      const el = c.matches('[data-tags]') ? c : c.querySelector<HTMLElement>('[data-tags]')!;
+      const ok = (!tag || el.dataset.tags!.split('|').includes(tag)) && (!term || el.dataset.text!.includes(term));
+      c.hidden = !ok;
+      shown += ok ? 1 : 0;
+    }
+    if (none) none.hidden = shown > 0;
+  };
+  q?.addEventListener('input', apply);
+  chips.forEach((c) =>
+    c.addEventListener('click', () => {
+      tag = c.dataset.tag ?? '';
+      chips.forEach((x) => x.classList.toggle('active', x === c));
+      apply();
+    }),
+  );
+</script>

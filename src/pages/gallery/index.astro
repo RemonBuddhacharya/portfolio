@@ -1,0 +1,51 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAlbums, albumCover, formatDate } from '../../lib/content';
+
+const albums = await getAlbums();
+---
+
+<BaseLayout title="Gallery" description="Photographs I have captured, organised in albums.">
+  <section class="section page">
+    <div class="container">
+      <h1 class="section-title">Gallery</h1>
+      <p class="section-lead">Moments I captured along the way, grouped in albums.</p>
+
+      {albums.length === 0 ? (
+        <p class="empty">No albums yet. Check back soon.</p>
+      ) : (
+        <div class="grid">
+          {albums.map((a) => {
+            const cover = albumCover(a);
+            return (
+              <a class="album" href={`/gallery/${a.id}`}>
+                <div class="thumb">
+                  {cover && <Image src={cover} alt="" widths={[400, 700, 1000]} sizes="(max-width: 700px) 100vw, 360px" />}
+                </div>
+                <div class="info">
+                  <h2>{a.data.title}</h2>
+                  <p>{a.data.photos.length} photo{a.data.photos.length === 1 ? '' : 's'} · {formatDate(a.data.date)}{a.data.draft && ' · DRAFT'}</p>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page { padding-top: 140px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 1.5rem; }
+  .album { display: block; border-radius: var(--radius); overflow: hidden; background: var(--surface); border: 1px solid var(--border); transition: var(--ease); }
+  .album:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 20px 40px -16px rgba(15, 23, 42, 0.2); }
+  .thumb { aspect-ratio: 4 / 3; background: var(--accent-soft); overflow: hidden; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+  .album:hover img { transform: scale(1.05); }
+  .info { padding: 1.1rem 1.3rem; }
+  h2 { font-size: 1.15rem; color: var(--primary); }
+  .info p { color: var(--muted); font-size: 0.85rem; margin-top: 0.2rem; }
+  @media (hover: none) { .album:hover { transform: none; } }
+</style>

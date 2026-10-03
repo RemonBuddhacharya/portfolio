@@ -1,0 +1,93 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Photo { image: ImageMetadata; alt: string; caption: string; location: string }
+interface Props { photos: Photo[] }
+const { photos } = Astro.props;
+
+const full = await Promise.all(photos.map((p) => getImage({ src: p.image, width: 2000, format: 'webp' })));
+---
+
+<ul class="masonry" data-gallery>
+  {photos.map((p, i) => (
+    <li>
+      <a href={full[i].src} data-caption={[p.caption, p.location].filter(Boolean).join(' · ')} data-alt={p.alt}>
+        <Image src={p.image} alt={p.alt} widths={[400, 700, 1000]} sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw" loading={i < 6 ? 'eager' : 'lazy'} />
+      </a>
+    </li>
+  ))}
+</ul>
+
+<dialog class="lightbox" aria-label="Photo viewer">
+  <button class="close" aria-label="Close">×</button>
+  <button class="nav prev" aria-label="Previous photo">‹</button>
+  <figure><img alt="" /><figcaption></figcaption></figure>
+  <button class="nav next" aria-label="Next photo">›</button>
+</dialog>
+
+<style>
+  .masonry { columns: 3 280px; column-gap: 1rem; }
+  .masonry li { break-inside: avoid; margin-bottom: 1rem; }
+  .masonry a { display: block; border-radius: 12px; overflow: hidden; background: var(--accent-soft); }
+  .masonry img { width: 100%; transition: transform 0.5s, opacity 0.3s; }
+  .masonry a:hover img { transform: scale(1.03); }
+
+  .lightbox { border: 0; padding: 0; background: transparent; max-width: 100vw; max-height: 100dvh; width: 100%; height: 100dvh; }
+  .lightbox::backdrop { background: rgba(2, 6, 23, 0.94); }
+  .lightbox[open] { display: grid; place-items: center; grid-template-columns: 56px 1fr 56px; }
+  figure { grid-column: 2; display: grid; gap: 0.75rem; justify-items: center; max-height: 100dvh; padding: 1rem 0; }
+  figure img { max-width: 100%; max-height: calc(100dvh - 5.5rem); object-fit: contain; border-radius: 6px; }
+  figcaption { color: #cbd5e1; font-size: 0.95rem; text-align: center; min-height: 1.4em; }
+  .lightbox button { background: rgba(255, 255, 255, 0.12); color: #fff; border: 0; border-radius: 999px; font-size: 1.8rem; line-height: 1; cursor: pointer; width: 44px; height: 44px; transition: background 0.2s; }
+  .lightbox button:hover { background: rgba(255, 255, 255, 0.25); }
+  .close { position: absolute; top: 12px; right: 12px; z-index: 2; }
+  .prev { grid-column: 1; justify-self: center; }
+  .next { grid-column: 3; justify-self: center; }
+  @media (max-width: 600px) {
+    .lightbox[open] { grid-template-columns: 1fr; }
+    figure { grid-column: 1; padding-inline: 0.5rem; }
+    .nav { position: absolute; bottom: 14px; z-index: 2; grid-column: auto; }
+    .prev { left: 14px; justify-self: auto; }
+    .next { right: 14px; justify-self: auto; }
+  }
+</style>
+
+<script>
+  const gallery = document.querySelector<HTMLElement>('[data-gallery]');
+  const box = document.querySelector<HTMLDialogElement>('.lightbox');
+  if (gallery && box) {
+    const links = [...gallery.querySelectorAll<HTMLAnchorElement>('a')];
+    const img = box.querySelector('img')!;
+    const cap = box.querySelector('figcaption')!;
+    let i = 0;
+    const show = (n: number) => {
+      i = (n + links.length) % links.length;
+      const a = links[i];
+      img.src = a.href;
+      img.alt = a.dataset.alt ?? '';
+      cap.textContent = a.dataset.caption ?? '';
+    };
+    links.forEach((a, n) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        show(n);
+        box.showModal();
+      }),
+    );
+    box.querySelector('.prev')!.addEventListener('click', () => show(i - 1));
+    box.querySelector('.next')!.addEventListener('click', () => show(i + 1));
+    box.querySelector('.close')!.addEventListener('click', () => box.close());
+    box.addEventListener('click', (e) => e.target === box && box.close());
+    box.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') show(i - 1);
+      if (e.key === 'ArrowRight') show(i + 1);
+    });
+    let x = 0;
+    box.addEventListener('touchstart', (e) => (x = e.changedTouches[0].clientX), { passive: true });
+    box.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - x;
+      if (Math.abs(dx) > 50) show(i + (dx < 0 ? 1 : -1));
+    });
+  }
+</script>

@@ -1,0 +1,12 @@
+{
+  "title": "NCRS Web System",
+  "org": "Nepal Cancer Relief Society",
+  "order": 2,
+  "description": "A web platform for managing donations, memberships, and administrative operations.",
+  "points": [
+    "Verified user authentication and role-based authorization",
+    "Validated donation tracking and payment workflows",
+    "Tested member management features and data integrity",
+    "Verified reporting and analytics accuracy"
+  ]
+}

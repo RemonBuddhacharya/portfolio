@@ -1,0 +1,26 @@
+---
+import { skills } from '../lib/content';
+---
+
+<section class="section alt" id="skills">
+  <div class="container">
+    <h2 class="section-title">Testing Stack</h2>
+    <div class="grid">
+      {skills.groups.map((g) => (
+        <div class="card">
+          <h3>{g.title}</h3>
+          <ul>{g.items.map((i) => <li>{i}</li>)}</ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 1.5rem; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; transition: var(--ease); }
+  .card:hover { border-color: var(--accent); }
+  h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 1.25rem; }
+  ul { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  li { background: var(--bg-alt); color: var(--muted); font-size: 0.85rem; font-weight: 500; padding: 0.4rem 0.9rem; border-radius: 8px; }
+</style>

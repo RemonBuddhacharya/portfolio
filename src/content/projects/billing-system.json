@@ -1,0 +1,12 @@
+{
+  "title": "Billing System",
+  "org": "Internal Application",
+  "order": 3,
+  "description": "An internal system for client billing, invoicing, and payment tracking.",
+  "points": [
+    "Validated invoice generation and payment processing flows",
+    "Tested user roles and permission controls (Admin, Client, Staff)",
+    "Performed cross-browser and peak-load testing",
+    "Verified financial data accuracy across integrated modules"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "groups": [
+    { "title": "Core QA", "items": ["Manual Testing", "Test Case Design", "Regression Testing", "Smoke & Sanity", "Cross-browser"] },
+    { "title": "Automation", "items": ["Cypress (UI)", "JavaScript"] },
+    { "title": "API & Performance", "items": ["Postman", "Swagger", "JMeter", "Load and Performance Testing"] },
+    { "title": "Tools & Process", "items": ["Azure DevOps", "Excel", "Agile / Scrum", "Documentation"] }
+  ]
+}
