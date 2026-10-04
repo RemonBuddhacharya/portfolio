@@ -1,4 +1,7 @@
 {
   "name": "reman-portfolio",
-  "compatibility_flags": ["nodejs_compat"]
+  "compatibility_flags": ["nodejs_compat"],
+  "vars": {
+    "KEYSTATIC_GITHUB_CLIENT_ID": "Iv23liOTpgzwrw1Ril3L"
+  }
 }
