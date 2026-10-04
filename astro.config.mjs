@@ -13,5 +13,8 @@ export default defineConfig({
   site: 'https://remanbuddhacharya.com.np',
   adapter: isDev ? undefined : cloudflare({ imageService: 'compile' }),
   session: false,
+  redirects: {
+    '/admin': '/keystatic',
+  },
   integrations: [react(), markdoc(), keystatic(), sitemap()],
 });
