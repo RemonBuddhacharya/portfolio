@@ -1,0 +1,105 @@
+---
+// Astro-friendly Disqus embed (guest commenting supported).
+// - Pure .astro, no framework island. Loads lazily on scroll.
+// - Guest mode: Disqus Admin → Settings → General → Community →
+//   check "Allow guest commenting". Guests then see
+//   "I'd rather post as guest" (manual approval, no reply emails).
+// - Free plan shows ads + tracking; remove ads via Disqus Pro.
+interface Props {
+  slug?: string;
+  title?: string;
+}
+const { slug = 'blog', title = 'Blog post' } = Astro.props;
+
+// TODO: replace with your Disqus shortname
+// (Disqus Admin → Settings → General → Shortname, e.g. "reman-portfolio")
+const SHORTNAME = 'remon-portfolio';
+const configured = !SHORTNAME.startsWith('REPLACE');
+const pageUrl = Astro.url.href;
+---
+
+<section
+  class="comments"
+  aria-label="Comments"
+  data-disqus-enabled={configured ? 'true' : undefined}
+  data-shortname={SHORTNAME}
+  data-identifier={slug}
+  data-title={title}
+  data-url={pageUrl}
+>
+  <h2>Comments</h2>
+  {configured ? (
+    <div class="disqus-slot">
+      <div id="disqus_thread" />
+      <p class="loading">Loading comments…</p>
+      <noscript>
+        <p>Please enable JavaScript to view the comments.</p>
+      </noscript>
+    </div>
+  ) : (
+    <div class="setup">
+      <p>
+        Comments unlock after adding your Disqus shortname in{' '}
+        <code>src/components/Comments.astro</code>.
+      </p>
+      <ol>
+        <li>
+          Create a site at <a href="https://disqus.com/admin/create/" rel="noopener">disqus.com/admin/create</a> → copy the <strong>Shortname</strong>.
+        </li>
+        <li>
+          Set <code>SHORTNAME</code> in this file.
+        </li>
+        <li>
+          Disqus Admin → Settings → General → Community → enable <strong>Guest commenting</strong>.
+        </li>
+        <li>Get email alerts: Disqus Admin → Settings → Email → enable reply + moderation emails.</li>
+      </ol>
+    </div>
+  )}
+</section>
+
+<script>
+  // Framework-free lazy Disqus loader — never blocks Astro's static render.
+  const host = document.querySelector<HTMLElement>('[data-disqus-enabled="true"]');
+  if (host) {
+    let loaded = false;
+    const load = () => {
+      if (loaded) return;
+      loaded = true;
+      const shortname = host.dataset.shortname ?? '';
+      const w = window as unknown as Record<string, unknown>;
+      w['disqus_config'] = function (this: { page: Record<string, string> }) {
+        this.page.url = host.dataset.url ?? window.location.href;
+        this.page.identifier = host.dataset.identifier ?? window.location.pathname;
+        this.page.title = host.dataset.title ?? document.title;
+      };
+      const s = document.createElement('script');
+      s.src = `https://${shortname}.disqus.com/embed.js`;
+      s.async = true;
+      s.setAttribute('data-timestamp', String(Date.now()));
+      host.querySelector('.disqus-slot')?.appendChild(s);
+      host.querySelector('.loading')?.remove();
+    };
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((entries, obs) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          load();
+          obs.disconnect();
+        }
+      }, { rootMargin: '400px' }).observe(host);
+    } else {
+      load();
+    }
+  }
+</script>
+
+<style>
+  .comments { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+  .comments h2 { font-size: 1.4rem; letter-spacing: -0.02em; color: var(--primary); margin-bottom: 1rem; }
+  .loading { color: var(--muted); font-size: 0.95rem; }
+  .setup { background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.4rem; color: var(--muted); font-size: 0.95rem; line-height: 1.7; }
+  .setup ol { padding-left: 1.2rem; margin-top: 0.6rem; list-style: decimal; }
+  .setup code { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.1em 0.4em; font-size: 0.85em; }
+  .setup a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .disqus-slot { min-height: 200px; }
+</style>

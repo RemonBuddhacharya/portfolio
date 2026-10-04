@@ -2,6 +2,7 @@
 import { getImage } from 'astro:assets';
 import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Comments from '../../components/Comments.astro';
 import { getPosts, formatDate, readingTime } from '../../lib/content';
 import { Image } from 'astro:assets';
 
@@ -20,15 +21,25 @@ const og = cover ? (await getImage({ src: cover, width: 1200, format: 'png' })).
 ---
 
 <BaseLayout title={title} description={summary} image={og} type="article">
+  <div class="progress" aria-hidden="true"></div>
   <article class="section page">
     <div class="container narrow">
-      <header>
-        <p class="meta">{formatDate(date)} · {readingTime(post.body)} min read</p>
+      <header class="hero">
+        <p class="kicker"><a href="/blog">Journal</a><span aria-hidden="true"> · </span>Personal essay</p>
         <h1>{title}</h1>
+        <p class="lede">{summary}</p>
+        <p class="meta">{formatDate(date)} · {readingTime(post.body)} min read</p>
         {tags.length > 0 && <p class="tags">{tags.map((t) => <span class="tag">{t}</span>)}</p>}
       </header>
-      {cover && <Image class="cover" src={cover} alt={coverAlt} widths={[640, 960, 1400]} sizes="(max-width: 800px) 100vw, 760px" loading="eager" />}
+      {cover && (
+        <figure class="cover-wrap">
+          <Image class="cover" src={cover} alt={coverAlt} widths={[640, 960, 1400]} sizes="(max-width: 800px) 100vw, 760px" loading="eager" />
+          {coverAlt && <figcaption>{coverAlt}</figcaption>}
+        </figure>
+      )}
       <div class="prose"><Content /></div>
+
+      <Comments slug={post.id} title={title} />
 
       <nav class="pager" aria-label="More posts">
         {newer ? <a href={`/blog/${newer.id}`}><small>Newer</small>{newer.data.title}</a> : <span />}
@@ -40,16 +51,37 @@ const og = cover ? (await getImage({ src: cover, width: 1200, format: 'png' })).
 </BaseLayout>
 
 <style>
-  .page { padding-top: 130px; }
-  header { text-align: center; margin-bottom: 2rem; }
+  .page { padding-top: 120px; }
+  .progress { position: fixed; inset: 0 0 auto 0; height: 3px; z-index: 60;
+    background: var(--accent);
+    transform-origin: 0 50%; transform: scaleX(0); }
+  .hero { text-align: center; margin-bottom: 1rem; }
+  .kicker { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .kicker a { color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.9rem, 4vw, 2.5rem); line-height: 1.2; letter-spacing: -0.03em; color: var(--primary); margin: 0.6rem auto 1rem; max-width: 22ch; text-wrap: balance; }
+  .lede { font-size: 1.05rem; line-height: 1.7; color: var(--muted); max-width: 620px; margin: 0 auto 1.2rem; text-wrap: pretty; }
   .meta { color: var(--muted); font-size: 0.9rem; }
-  h1 { font-size: clamp(2rem, 6vw, 3rem); line-height: 1.15; letter-spacing: -0.03em; color: var(--primary); margin: 0.6rem 0 1rem; }
-  .tags { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
-  .cover { width: 100%; border-radius: var(--radius); margin-bottom: 2.5rem; aspect-ratio: 16 / 9; object-fit: cover; }
+  .tags { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
+  .cover-wrap { margin: 2rem 0 0; }
+  .cover { width: 100%; height: auto; max-height: 78vh; object-fit: contain; object-position: center; border-radius: var(--radius); background: var(--accent-soft); border: 1px solid var(--border); }
+  .cover-wrap figcaption { text-align: center; color: var(--muted); font-size: 0.85rem; margin-top: 0.6rem; font-style: italic; }
   .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 4rem; }
   .pager a { display: block; padding: 1rem 1.2rem; border: 1px solid var(--border); border-radius: 12px; font-weight: 600; color: var(--primary); transition: var(--ease); }
   .pager a:hover { border-color: var(--accent); }
   .pager small { display: block; color: var(--muted); font-weight: 500; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; }
   .pager .right { text-align: right; }
   @media (max-width: 560px) { .pager { grid-template-columns: 1fr; } }
+  @media (min-width: 900px) { .container.narrow { max-width: 780px; } }
 </style>
+
+<script>
+  const bar = document.querySelector('.progress');
+  const onScroll = () => {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    const p = max > 0 ? h.scrollTop / max : 0;
+    if (bar instanceof HTMLElement) bar.style.transform = `scaleX(${p})`;
+  };
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>
