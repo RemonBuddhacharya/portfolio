@@ -1,8 +1,10 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
 
 // Local files in dev, GitHub commits in production (admin login via GitHub OAuth).
-// Run `KEYSTATIC_STORAGE=github npm run dev` once to create the GitHub App (see README).
-const storage = import.meta.env.PROD || import.meta.env.KEYSTATIC_STORAGE === 'github'
+// Run `PUBLIC_KEYSTATIC_STORAGE=github npm run dev` once to create the GitHub App (see README).
+// Must be PUBLIC_ so Vite exposes it to the client bundle too; otherwise the
+// server runs in github mode while the UI still thinks it's local and renders "Not found".
+const storage = import.meta.env.PROD || import.meta.env.PUBLIC_KEYSTATIC_STORAGE === 'github'
   ? ({ kind: 'github', repo: { owner: 'RemonBuddhacharya', name: 'portfolio' } } as const)
   : ({ kind: 'local' } as const);
 

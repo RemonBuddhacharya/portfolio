@@ -59,7 +59,7 @@ You never invent these. Keystatic creates them (step 2).
 2. **Create the GitHub App and the secrets (local, once).**
    ```bash
    git pull && npm install
-   KEYSTATIC_STORAGE=github npm run dev
+   PUBLIC_KEYSTATIC_STORAGE=github npm run dev
    ```
    Open http://127.0.0.1:4321/keystatic → **Create GitHub App**.
    - Deployed URL: `https://remanbuddhacharya.com.np`
